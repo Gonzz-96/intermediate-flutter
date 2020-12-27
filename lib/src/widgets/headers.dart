@@ -220,3 +220,60 @@ class _WaveHeaderPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class WaveGradientHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _WaveGradientHeaderPainter(),
+      ),
+    );
+  }
+}
+
+class _WaveGradientHeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final gradient = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xff6D05E8),
+        Color(0xffC012FF),
+        Color(0xff6D05FA),
+      ],
+    );
+
+    final rect = Rect.fromCircle(center: Offset(165.0, 55.0), radius: 180);
+
+    final paint = Paint()
+      // set properties for paint
+      ..shader = gradient.createShader(rect)
+      ..strokeWidth = 10.0
+      ..style = PaintingStyle.fill;
+    // create path
+    final path = Path()
+      ..lineTo(0, size.height * 0.30)
+      ..quadraticBezierTo(
+        size.width * 0.25,
+        size.height * 0.35,
+        size.width * 0.5,
+        size.height * 0.3,
+      )
+      ..quadraticBezierTo(
+        size.width * 0.75,
+        size.height * 0.25,
+        size.width,
+        size.height * 0.3,
+      )
+      ..lineTo(size.width, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}

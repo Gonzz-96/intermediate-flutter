@@ -101,3 +101,38 @@ class _DiamondHeaderPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class PeakHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _PeakHeaderPainter(),
+      ),
+    );
+  }
+}
+
+class _PeakHeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    // setting properties to paint
+    paint.color = Color(0xff615AAB);
+    paint.strokeWidth = 5.0;
+    paint.style = PaintingStyle.fill;
+    // create path for thte canvas
+    final path = Path();
+    path.lineTo(0, size.height * 0.30);
+    path.lineTo(size.width * 0.5, size.height * 0.35); // peak
+    path.lineTo(size.width, size.height * 0.30);
+    path.lineTo(size.width, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}

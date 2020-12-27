@@ -67,3 +67,37 @@ class _DiagonalHeaderPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class DiamondHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _DiamondHeaderPainter(),
+      ),
+    );
+  }
+}
+
+class _DiamondHeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    // setting properties to the paint
+    paint.color = Color(0xff615AAB);
+    paint.strokeWidth = 5.0;
+    paint.style = PaintingStyle.fill;
+    // create path for the canvas
+    final path = Path();
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    // path.lineTo(0, size.height);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}

@@ -22,32 +22,37 @@ class _HeadersPageState extends State<HeadersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: BottomNavigationBar(
-          elevation: 5.0,
-          unselectedItemColor: Colors.grey,
-          currentIndex: _currentHeaderIndex,
-          onTap: _updateIndex,
-          selectedItemColor: Color(0xff6D05FA),
-          items: [
-            BottomNavigationBarItem(
-                label: 'Squared', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(
-                label: 'Circular', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(
-                label: 'Diagonal', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(
-                label: 'Diamond', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(
-                label: 'Peak',
-                icon: Icon(
-                  Icons.gradient,
-                )),
-            BottomNavigationBarItem(label: 'Curve', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(label: 'Wave', icon: Icon(Icons.gradient)),
-            BottomNavigationBarItem(
-                label: 'Gradient', icon: Icon(Icons.gradient)),
-          ],
+      bottomNavigationBar: Container(
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: BottomAppBar(
+          child: BottomNavigationBar(
+            elevation: 5.0,
+            unselectedItemColor: Colors.grey,
+            currentIndex: _currentHeaderIndex,
+            onTap: _updateIndex,
+            selectedItemColor: Color(0xff6D05FA),
+            items: [
+              BottomNavigationBarItem(
+                  label: 'Squared', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Circular', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Diagonal', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Diamond', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Peak',
+                  icon: Icon(
+                    Icons.gradient,
+                  )),
+              BottomNavigationBarItem(
+                  label: 'Curve', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Wave', icon: Icon(Icons.gradient)),
+              BottomNavigationBarItem(
+                  label: 'Gradient', icon: Icon(Icons.gradient)),
+            ],
+          ),
         ),
       ),
       body: IndexedStack(

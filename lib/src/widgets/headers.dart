@@ -42,23 +42,21 @@ class DiagonalHeader extends StatelessWidget {
 class _DiagonalHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-
-    // some properties
-    paint.color = Color(0xff615AAB);
-    // PaintingStyle.stroke --> draw only the borders
-    // PaintingStyle.fill --> draw the whole figure
-    paint.style = PaintingStyle.fill;
-    paint.strokeWidth = 2;
+    final paint = Paint()
+      // some properties
+      ..color = Color(0xff615AAB)
+      // PaintingStyle.stroke --> draw only the borders
+      // PaintingStyle.fill --> draw the whole figure
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 2;
 
     // variable that says how the Paint is going to be moved
-    final path = Path();
-
-    // draw with Path and Paint (moveTo and lineTo)
-    path.moveTo(0, size.height * 0.35);
-    path.lineTo(size.width, size.height * 0.30);
-    path.lineTo(size.width, 0);
-    path.lineTo(0, 0);
+    final path = Path()
+      // draw with Path and Paint (moveTo and lineTo)
+      ..moveTo(0, size.height * 0.35)
+      ..lineTo(size.width, size.height * 0.30)
+      ..lineTo(size.width, 0)
+      ..lineTo(0, 0);
 
     // draw in canvas
     canvas.drawPath(path, paint);
@@ -84,15 +82,13 @@ class DiamondHeader extends StatelessWidget {
 class _DiamondHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // setting properties to the paint
-    paint.color = Color(0xff615AAB);
-    paint.strokeWidth = 5.0;
-    paint.style = PaintingStyle.fill;
+    final paint = Paint()
+      // setting properties to the paint
+      ..color = Color(0xff615AAB)
+      ..strokeWidth = 5.0
+      ..style = PaintingStyle.fill;
     // create path for the canvas
-    final path = Path();
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
+    final path = Path()..lineTo(size.width, size.height)..lineTo(size.width, 0);
     // path.lineTo(0, size.height);
 
     canvas.drawPath(path, paint);
@@ -118,17 +114,17 @@ class PeakHeader extends StatelessWidget {
 class _PeakHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // setting properties to paint
-    paint.color = Color(0xff615AAB);
-    paint.strokeWidth = 5.0;
-    paint.style = PaintingStyle.fill;
+    final paint = Paint()
+      // setting properties to paint
+      ..color = Color(0xff615AAB)
+      ..strokeWidth = 5.0
+      ..style = PaintingStyle.fill;
     // create path for thte canvas
-    final path = Path();
-    path.lineTo(0, size.height * 0.30);
-    path.lineTo(size.width * 0.5, size.height * 0.35); // peak
-    path.lineTo(size.width, size.height * 0.30);
-    path.lineTo(size.width, 0);
+    final path = Path()
+      ..lineTo(0, size.height * 0.30)
+      ..lineTo(size.width * 0.5, size.height * 0.35) // peak
+      ..lineTo(size.width, size.height * 0.30)
+      ..lineTo(size.width, 0);
 
     canvas.drawPath(path, paint);
   }
@@ -153,23 +149,23 @@ class CurveHeader extends StatelessWidget {
 class _CurveHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // setting properties to paint
-    paint.color = Color(0xff615AAB);
-    paint.strokeWidth = 20.0;
-    paint.style = PaintingStyle.fill;
+    final paint = Paint()
+      // setting properties to paint
+      ..color = Color(0xff615AAB)
+      ..strokeWidth = 20.0
+      ..style = PaintingStyle.fill;
     // create path for thte canvas
-    final path = Path();
-    path.lineTo(0, size.height * 0.25);
-    // first two values are the curvature angle
-    // and last values are the final point of the curve
-    path.quadraticBezierTo(
-      size.width * 0.5,
-      size.height * 0.50,
-      size.width,
-      size.height * 0.25,
-    );
-    path.lineTo(size.width, 0);
+    final path = Path()
+      ..lineTo(0, size.height * 0.25)
+      // first two values are the curvature angle
+      // and last values are the final point of the curve
+      ..quadraticBezierTo(
+        size.width * 0.5,
+        size.height * 0.50,
+        size.width,
+        size.height * 0.25,
+      )
+      ..lineTo(size.width, 0);
 
     // path.lineTo(size.width, size.height * 0.25);
 
@@ -196,27 +192,27 @@ class WaveHeader extends StatelessWidget {
 class _WaveHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // set properties for paint
-    paint.color = Color(0xff615AAB);
-    paint.strokeWidth = 10.0;
-    paint.style = PaintingStyle.fill;
+    final paint = Paint()
+      // set properties for paint
+      ..color = Color(0xff615AAB)
+      ..strokeWidth = 10.0
+      ..style = PaintingStyle.fill;
     // create path
-    final path = Path();
-    path.lineTo(0, size.height * 0.30);
-    path.quadraticBezierTo(
-      size.width * 0.25,
-      size.height * 0.35,
-      size.width * 0.5,
-      size.height * 0.3,
-    );
-    path.quadraticBezierTo(
-      size.width * 0.75,
-      size.height * 0.25,
-      size.width,
-      size.height * 0.3,
-    );
-    path.lineTo(size.width, 0);
+    final path = Path()
+      ..lineTo(0, size.height * 0.30)
+      ..quadraticBezierTo(
+        size.width * 0.25,
+        size.height * 0.35,
+        size.width * 0.5,
+        size.height * 0.3,
+      )
+      ..quadraticBezierTo(
+        size.width * 0.75,
+        size.height * 0.25,
+        size.width,
+        size.height * 0.3,
+      )
+      ..lineTo(size.width, 0);
 
     canvas.drawPath(path, paint);
   }

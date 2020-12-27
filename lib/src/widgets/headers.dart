@@ -136,3 +136,46 @@ class _PeakHeaderPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class CurveHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _CurveHeaderPainter(),
+      ),
+    );
+  }
+}
+
+class _CurveHeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    // setting properties to paint
+    paint.color = Color(0xff615AAB);
+    paint.strokeWidth = 20.0;
+    paint.style = PaintingStyle.fill;
+    // create path for thte canvas
+    final path = Path();
+    path.lineTo(0, size.height * 0.25);
+    // first two values are the curvature angle
+    // and last values are the final point of the curve
+    path.quadraticBezierTo(
+      size.width * 0.5,
+      size.height * 0.50,
+      size.width,
+      size.height * 0.25,
+    );
+    path.lineTo(size.width, 0);
+
+    // path.lineTo(size.width, size.height * 0.25);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
 class AnimationsPage extends StatelessWidget {
@@ -16,10 +17,41 @@ class AnimatedRectangle extends StatefulWidget {
   _AnimatedRectangleState createState() => _AnimatedRectangleState();
 }
 
-class _AnimatedRectangleState extends State<AnimatedRectangle> {
+class _AnimatedRectangleState extends State<AnimatedRectangle>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> rotation;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 5000),
+    );
+
+    rotation = Tween(begin: 0.0, end: 2.0 * 3.14).animate(controller);
+
+    controller.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller = null;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _Rectangle();
+    return AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          print(rotation.value);
+          return Transform.rotate(
+            child: _Rectangle(),
+            angle: rotation.value,
+          );
+        });
   }
 }
 

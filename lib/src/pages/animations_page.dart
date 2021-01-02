@@ -31,7 +31,12 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
       duration: Duration(milliseconds: 2000),
     );
 
-    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.decelerate,
+      ),
+    );
 
     controller.addListener(() {
       // this listener is going to be executed every time
@@ -44,8 +49,7 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
 
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        controller.reverse();
-      } else if (status == AnimationStatus.dismissed) {
+        controller.reset();
         controller.forward();
       }
     });

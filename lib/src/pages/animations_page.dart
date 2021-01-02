@@ -1,3 +1,5 @@
+import 'dart:math' as Math;
+
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
@@ -26,10 +28,27 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
   void initState() {
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 5000),
+      duration: Duration(milliseconds: 2000),
     );
 
-    rotation = Tween(begin: 0.0, end: 2.0 * 3.14).animate(controller);
+    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+
+    controller.addListener(() {
+      // this listener is going to be executed every time
+      // the value of the animation changes
+      // there is another function called addStatusListener
+      // that only works with the STATUS of the controller
+
+      // print('Status: ${controller.status}');
+    });
+
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        controller.forward();
+      }
+    });
 
     controller.forward();
     super.initState();
@@ -46,7 +65,6 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
     return AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
-          print(rotation.value);
           return Transform.rotate(
             child: _Rectangle(),
             angle: rotation.value,

@@ -21,10 +21,14 @@ class AnimatedRectangle extends StatefulWidget {
 
 class _AnimatedRectangleState extends State<AnimatedRectangle>
     with SingleTickerProviderStateMixin {
+  // NOTE: all of the aimatinos are associated with
+  // the controller. They won't be finished until
+  // the controller finishes the whole animation.
   AnimationController controller;
   Animation<double> rotation;
   Animation<double> opacity;
   Animation<double> xAxisTranslation;
+  Animation<double> squareScale;
 
   @override
   void initState() {
@@ -51,6 +55,13 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
       CurvedAnimation(
         parent: controller,
         curve: Curves.bounceOut,
+      ),
+    );
+
+    squareScale = Tween(begin: 0.0, end: 2.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.easeOut,
       ),
     );
 
@@ -83,19 +94,23 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: Offset(xAxisTranslation.value, 0.0),
-            child: Transform.rotate(
-              child: Opacity(
+      animation: controller,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(xAxisTranslation.value, 0.0),
+          child: Transform.rotate(
+            child: Opacity(
+              child: Transform.scale(
+                scale: squareScale.value,
                 child: _Rectangle(),
-                opacity: opacity.value,
               ),
-              angle: rotation.value,
+              opacity: opacity.value,
             ),
-          );
-        });
+            angle: rotation.value,
+          ),
+        );
+      },
+    );
   }
 }
 

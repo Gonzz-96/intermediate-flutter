@@ -24,6 +24,7 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
   AnimationController controller;
   Animation<double> rotation;
   Animation<double> opacity;
+  Animation<double> xAxisTranslation;
 
   @override
   void initState() {
@@ -43,6 +44,13 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
       CurvedAnimation(
         parent: controller,
         curve: Interval(0.0, 0.25, curve: Curves.easeOut),
+      ),
+    );
+
+    xAxisTranslation = Tween(begin: 0.0, end: 200.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.bounceOut,
       ),
     );
 
@@ -77,12 +85,15 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
     return AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
-          return Transform.rotate(
-            child: Opacity(
-              child: _Rectangle(),
-              opacity: opacity.value,
+          return Transform.translate(
+            offset: Offset(xAxisTranslation.value, 0.0),
+            child: Transform.rotate(
+              child: Opacity(
+                child: _Rectangle(),
+                opacity: opacity.value,
+              ),
+              angle: rotation.value,
             ),
-            angle: rotation.value,
           );
         });
   }

@@ -27,6 +27,7 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
   AnimationController controller;
   Animation<double> rotation;
   Animation<double> opacity;
+  Animation<double> opacityFadeOut;
   Animation<double> xAxisTranslation;
   Animation<double> squareScale;
 
@@ -48,6 +49,13 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
       CurvedAnimation(
         parent: controller,
         curve: Interval(0.0, 0.25, curve: Curves.easeOut),
+      ),
+    );
+
+    opacityFadeOut = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Interval(0.75, 1, curve: Curves.easeOut),
       ),
     );
 
@@ -104,7 +112,7 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
                 scale: squareScale.value,
                 child: _Rectangle(),
               ),
-              opacity: opacity.value,
+              opacity: opacity.value - opacityFadeOut.value,
             ),
             angle: rotation.value,
           ),

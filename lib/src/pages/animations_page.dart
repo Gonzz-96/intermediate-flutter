@@ -23,6 +23,7 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> rotation;
+  Animation<double> opacity;
 
   @override
   void initState() {
@@ -34,7 +35,14 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
     rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Curves.decelerate,
+        curve: Curves.elasticOut,
+      ),
+    );
+
+    opacity = Tween(begin: 0.1, end: 1.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Interval(0.0, 0.25, curve: Curves.easeOut),
       ),
     );
 
@@ -70,7 +78,10 @@ class _AnimatedRectangleState extends State<AnimatedRectangle>
         animation: controller,
         builder: (context, child) {
           return Transform.rotate(
-            child: _Rectangle(),
+            child: Opacity(
+              child: _Rectangle(),
+              opacity: opacity.value,
+            ),
             angle: rotation.value,
           );
         });

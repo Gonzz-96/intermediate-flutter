@@ -8,21 +8,40 @@ class CircularProgressPage extends StatefulWidget {
 }
 
 class _CircularProgressPageState extends State<CircularProgressPage> {
+  double _percentage = 30;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.refresh),
+        backgroundColor: Colors.pink,
+        onPressed: () {
+          _increasePercentage(additionalPercentage: 1);
+          if (_percentage > 100) {
+            _resetPercentage();
+          }
+        },
+      ),
       body: Center(
         child: Container(
           padding: EdgeInsets.all(5.0),
           width: 300,
           height: 300,
           child: CustomPaint(
-            painter: _RadialProgressPainter(arcPercentage: 50),
+            painter: _RadialProgressPainter(arcPercentage: _percentage),
           ),
         ),
       ),
     );
   }
+
+  void _increasePercentage({int additionalPercentage = 10}) => setState(() {
+        _percentage += additionalPercentage;
+      });
+
+  void _resetPercentage() => setState(() {
+        _percentage = 0;
+      });
 }
 
 class _RadialProgressPainter extends CustomPainter {

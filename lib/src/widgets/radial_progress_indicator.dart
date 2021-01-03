@@ -15,6 +15,7 @@ class RadialProgressIndicator extends StatefulWidget {
 class _RadialProgressIndicatorState extends State<RadialProgressIndicator>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
+  Animation<double> progressAnimation;
   double previousPercentage;
 
   @override
@@ -23,7 +24,14 @@ class _RadialProgressIndicatorState extends State<RadialProgressIndicator>
 
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 500),
+    );
+
+    progressAnimation = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.easeInOutQuint,
+      ),
     );
 
     super.initState();
@@ -51,7 +59,7 @@ class _RadialProgressIndicatorState extends State<RadialProgressIndicator>
           child: CustomPaint(
             painter: _RadialProgressPainter(
               arcPercentage: (widget.percentage - difference) +
-                  (difference * controller.value),
+                  (difference * progressAnimation.value),
             ),
           ),
         );

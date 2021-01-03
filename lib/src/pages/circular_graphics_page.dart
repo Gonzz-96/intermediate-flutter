@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intermediate_flutter/src/widgets/radial_progress_indicator.dart';
 
 class CircularGraphicsPage extends StatefulWidget {
   @override
@@ -16,9 +17,12 @@ class _CircularGraphicsPageState extends State<CircularGraphicsPage> {
         onPressed: _fabAction,
       ),
       body: Center(
-        child: Text(
-          '$_percentage%',
-          style: TextStyle(fontSize: 50.0),
+        child: Container(
+          height: 300,
+          width: 300,
+          child: RadialProgressIndicator(
+            percentage: _percentage,
+          ),
         ),
       ),
     );

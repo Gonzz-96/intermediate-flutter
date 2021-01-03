@@ -99,6 +99,18 @@ class _RadialProgressPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // code used to add a gradient in the arc
+    // final gradient = LinearGradient(colors: [
+    //   Color(0xFFC012FF),
+    //   Color(0xFF6D05E8),
+    //   Colors.red,
+    // ]);
+    //
+    // final rect = Rect.fromCircle(
+    //   center: Offset(0.0, 0.0),
+    //   radius: 180,
+    // );
+
     // complete circle
     final circlePaint = Paint()
       ..strokeWidth = secondaryBarWidth
@@ -114,6 +126,8 @@ class _RadialProgressPainter extends CustomPainter {
     final arcPaint = Paint()
       ..strokeWidth = primaryBarWidth
       ..color = primaryColor
+      // to add a gradient, uncomment this line
+      // ..shader = gradient.createShader(rect)
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 

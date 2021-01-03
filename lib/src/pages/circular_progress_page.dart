@@ -1,4 +1,5 @@
 import 'dart:math' as Math;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -7,20 +8,41 @@ class CircularProgressPage extends StatefulWidget {
   _CircularProgressPageState createState() => _CircularProgressPageState();
 }
 
-class _CircularProgressPageState extends State<CircularProgressPage> {
-  double _percentage = 30;
+class _CircularProgressPageState extends State<CircularProgressPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+
+  double _percentage = 0.0;
+  double _newPercentage = 0.0;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 800),
+    );
+    controller.addListener(() {
+      setState(() {
+        _percentage = lerpDouble(_percentage, _newPercentage, controller.value);
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
         backgroundColor: Colors.pink,
-        onPressed: () {
-          _increasePercentage(additionalPercentage: 1);
-          if (_percentage > 100) {
-            _resetPercentage();
-          }
-        },
+        onPressed: _fabAction,
       ),
       body: Center(
         child: Container(
@@ -35,12 +57,23 @@ class _CircularProgressPageState extends State<CircularProgressPage> {
     );
   }
 
+  void _fabAction() {
+    _increasePercentage();
+    if (_percentage > 100) {
+      _resetPercentage();
+    }
+
+    controller.forward(from: 0.0);
+  }
+
   void _increasePercentage({int additionalPercentage = 10}) => setState(() {
-        _percentage += additionalPercentage;
+        _percentage = _newPercentage;
+        _newPercentage += additionalPercentage;
       });
 
   void _resetPercentage() => setState(() {
         _percentage = 0;
+        _newPercentage = 0;
       });
 }
 

@@ -3,9 +3,19 @@ import 'dart:math' as Math;
 import 'package:flutter/material.dart';
 
 class RadialProgressIndicator extends StatefulWidget {
-  RadialProgressIndicator({@required this.percentage});
+  RadialProgressIndicator({
+    @required this.percentage,
+    this.primaryBarWidth = BarWidth.medium,
+    this.secondaryBarWidth = BarWidth.thin,
+    this.primaryColor = Colors.pink,
+    this.secondaryColor = Colors.grey,
+  });
 
   final double percentage;
+  final BarWidth primaryBarWidth;
+  final BarWidth secondaryBarWidth;
+  final Color primaryColor;
+  final Color secondaryColor;
 
   @override
   _RadialProgressIndicatorState createState() =>
@@ -58,8 +68,12 @@ class _RadialProgressIndicatorState extends State<RadialProgressIndicator>
           height: double.infinity,
           child: CustomPaint(
             painter: _RadialProgressPainter(
-              arcPercentage: (widget.percentage - difference) +
+              (widget.percentage - difference) +
                   (difference * progressAnimation.value),
+              _getValueFromBarWidth(widget.primaryBarWidth),
+              _getValueFromBarWidth(widget.secondaryBarWidth),
+              widget.primaryColor,
+              widget.secondaryColor,
             ),
           ),
         );
@@ -69,16 +83,26 @@ class _RadialProgressIndicatorState extends State<RadialProgressIndicator>
 }
 
 class _RadialProgressPainter extends CustomPainter {
-  _RadialProgressPainter({this.arcPercentage = 0});
+  _RadialProgressPainter(
+    this.arcPercentage,
+    this.primaryBarWidth,
+    this.secondaryBarWidth,
+    this.primaryColor,
+    this.secondaryColor,
+  );
 
   double arcPercentage;
+  double primaryBarWidth;
+  double secondaryBarWidth;
+  Color primaryColor;
+  Color secondaryColor;
 
   @override
   void paint(Canvas canvas, Size size) {
     // complete circle
     final circlePaint = Paint()
-      ..strokeWidth = 4.0
-      ..color = Colors.grey
+      ..strokeWidth = secondaryBarWidth
+      ..color = secondaryColor
       ..style = PaintingStyle.stroke;
 
     final centerOffset = Offset(size.width * .5, size.height * 0.5);
@@ -88,8 +112,8 @@ class _RadialProgressPainter extends CustomPainter {
 
     // arc
     final arcPaint = Paint()
-      ..strokeWidth = 10.0
-      ..color = Colors.pink
+      ..strokeWidth = primaryBarWidth
+      ..color = primaryColor
       ..style = PaintingStyle.stroke;
 
     // filled part
@@ -108,4 +132,27 @@ class _RadialProgressPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+enum BarWidth {
+  thin,
+  medium,
+  thick,
+}
+
+double _getValueFromBarWidth(BarWidth width) {
+  switch (width) {
+    case BarWidth.thin:
+      return 4.0;
+      break;
+    case BarWidth.medium:
+      return 10.0;
+      break;
+    case BarWidth.thick:
+      return 15.0;
+      break;
+    default:
+      return 4.0;
+      break;
+  }
 }

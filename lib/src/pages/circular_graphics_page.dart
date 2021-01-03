@@ -22,6 +22,7 @@ class _CircularGraphicsPageState extends State<CircularGraphicsPage> {
           width: 300,
           child: RadialProgressIndicator(
             percentage: _percentage,
+            primaryColor: Colors.purple,
           ),
         ),
       ),

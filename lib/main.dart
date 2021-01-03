@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intermediate_flutter/src/labs/circular_progress_page.dart';
+import 'package:intermediate_flutter/src/pages/circular_graphics_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CircularProgressPage(),
+      home: CircularGraphicsPage(),
     );
   }
 }

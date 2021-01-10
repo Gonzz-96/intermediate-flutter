@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
+import 'package:intermediate_flutter/src/labs/slideshow_page.dart';
 import 'package:intermediate_flutter/src/pages/splash_page.dart';
 
 void main() {

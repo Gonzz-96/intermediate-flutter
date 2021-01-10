@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intermediate_flutter/src/models/slider_model.dart';
+import 'package:provider/provider.dart';
 
 class SlideShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Expanded(child: _Slides()),
-          Dots(),
-        ],
+    return ChangeNotifierProvider(
+      create: (_) => SliderModel(),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Expanded(child: _Slides()),
+            Dots(),
+          ],
+        ),
       ),
     );
   }
@@ -40,12 +45,14 @@ class _Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pageViewIndex = Provider.of<SliderModel>(context).currentPage;
+
     return Container(
       width: 12,
       height: 12,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: (pageViewIndex == index) ? Colors.blue : Colors.grey,
         shape: BoxShape.circle,
       ),
     );
@@ -65,6 +72,8 @@ class _SlidesState extends State<_Slides> {
     super.initState();
     pageViewController.addListener(() {
       print('Current page: ${pageViewController.page}');
+      Provider.of<SliderModel>(context, listen: false).currentPage =
+          pageViewController.page;
     });
   }
 

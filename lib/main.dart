@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intermediate_flutter/src/labs/slideshow_page.dart';
 import 'package:intermediate_flutter/src/pages/splash_page.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SlideShowPage(),
+      home: SplashPage(),
     );
   }
 }

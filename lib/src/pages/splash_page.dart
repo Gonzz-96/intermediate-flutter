@@ -3,6 +3,7 @@ import 'package:intermediate_flutter/src/challenges/animated_square_screen.dart'
 import 'package:intermediate_flutter/src/pages/animations_page.dart';
 import 'package:intermediate_flutter/src/pages/circular_graphics_page.dart';
 import 'package:intermediate_flutter/src/pages/headers_page.dart';
+import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
 
 class SplashPage extends StatelessWidget {
   @override
@@ -32,6 +33,10 @@ class SplashPage extends StatelessWidget {
               text: 'Circular Graphics',
               onTap: () => _navigateTo(CircularGraphicsPage(), context),
             ),
+            _FlatButton(
+              text: 'Slideshow Page',
+              onTap: () => _navigateTo(SlideshowPage(), context),
+            ),
           ],
         ),
       ),
@@ -40,27 +45,8 @@ class SplashPage extends StatelessWidget {
 
   void _navigateTo(Widget screen, BuildContext context) => Navigator.push(
         context,
-        _createRoute(screen),
+        MaterialPageRoute(builder: (context) => screen),
       );
-
-  PageRoute _createRoute(Widget screen) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => screen,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(0.0, 1.0);
-        var end = Offset.zero;
-        var curve = Curves.ease;
-
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
 }
 
 class _FlatButton extends StatelessWidget {

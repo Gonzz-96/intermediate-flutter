@@ -3,6 +3,10 @@ import 'package:intermediate_flutter/src/models/slider_model.dart';
 import 'package:provider/provider.dart';
 
 class Slideshow extends StatelessWidget {
+  final List<Widget> slides;
+
+  Slideshow({this.slides = const []});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -10,7 +14,7 @@ class Slideshow extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Expanded(child: _Slides()),
+            Expanded(child: _Slides(slides: slides)),
             _Dots(),
           ],
         ),
@@ -62,6 +66,10 @@ class _Dot extends StatelessWidget {
 }
 
 class _Slides extends StatefulWidget {
+  final List<Widget> slides;
+
+  _Slides({this.slides});
+
   @override
   _SlidesState createState() => _SlidesState();
 }
@@ -90,20 +98,16 @@ class _SlidesState extends State<_Slides> {
     return Container(
       child: PageView(
         controller: pageViewController,
-        children: [
-          _Slide('assets/slides/1.png'),
-          _Slide('assets/slides/2.png'),
-          _Slide('assets/slides/3.png')
-        ],
+        children: widget.slides.map((element) => _Slide(element)).toList(),
       ),
     );
   }
 }
 
 class _Slide extends StatelessWidget {
-  _Slide(this.image);
+  _Slide(this.child);
 
-  final String image;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +115,7 @@ class _Slide extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       padding: EdgeInsets.all(15),
-      child: Image.asset(image),
+      child: child,
     );
   }
 }

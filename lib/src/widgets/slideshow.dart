@@ -161,11 +161,9 @@ class _SlideshowModel with ChangeNotifier {
 
   set primaryColor(Color primaryColor) {
     this._primaryColor = primaryColor;
-    notifyListeners();
   }
 
   set secondaryColor(Color secondaryColor) {
     this._secondaryColor = secondaryColor;
-    notifyListeners();
   }
 }

@@ -4,8 +4,12 @@ import 'package:provider/provider.dart';
 
 class Slideshow extends StatelessWidget {
   final List<Widget> slides;
+  final Color primaryColor;
 
-  Slideshow({this.slides = const []});
+  Slideshow({
+    this.slides = const [],
+    this.primaryColor = Colors.pinkAccent,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class Slideshow extends StatelessWidget {
         child: Column(
           children: [
             Expanded(child: _Slides(slides: slides)),
-            _Dots(),
+            _Dots(amountOfPoints: slides.length, primaryColor: primaryColor),
           ],
         ),
       ),
@@ -24,6 +28,11 @@ class Slideshow extends StatelessWidget {
 }
 
 class _Dots extends StatelessWidget {
+  _Dots({this.amountOfPoints, this.primaryColor});
+
+  final int amountOfPoints;
+  final Color primaryColor;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,11 +40,8 @@ class _Dots extends StatelessWidget {
       height: 70,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _Dot(0),
-          _Dot(1),
-          _Dot(2),
-        ],
+        children:
+            List.generate(amountOfPoints, (index) => _Dot(index, primaryColor)),
       ),
     );
   }
@@ -43,8 +49,9 @@ class _Dots extends StatelessWidget {
 
 class _Dot extends StatelessWidget {
   final int index;
+  final Color primaryColor;
 
-  _Dot(this.index);
+  _Dot(this.index, this.primaryColor);
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +59,18 @@ class _Dot extends StatelessWidget {
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: 12,
-      height: 12,
+      width: _isSelected(pageViewIndex) ? 15 : 12,
+      height: _isSelected(pageViewIndex) ? 15 : 12,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: (pageViewIndex >= index - 0.5 && pageViewIndex < index + 0.5)
-            ? Colors.pinkAccent
-            : Colors.grey,
+        color: _isSelected(pageViewIndex) ? primaryColor : Colors.grey,
         shape: BoxShape.circle,
       ),
     );
   }
+
+  bool _isSelected(double currentIndex) =>
+      (currentIndex >= index - 0.5 && currentIndex < index + 0.5);
 }
 
 class _Slides extends StatefulWidget {

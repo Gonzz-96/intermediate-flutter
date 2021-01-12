@@ -99,7 +99,7 @@ class _PinterestMenuButton extends StatelessWidget {
         child: Icon(
           item.icon,
           size: (selectedItem == index) ? 35 : 25,
-          color: (selectedItem == index) ? Colors.blueAccent : Colors.blueGrey,
+          color: (selectedItem == index) ? Colors.blue : Colors.blueGrey,
         ),
       ),
     );

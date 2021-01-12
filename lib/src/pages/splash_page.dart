@@ -3,6 +3,7 @@ import 'package:intermediate_flutter/src/challenges/animated_square_screen.dart'
 import 'package:intermediate_flutter/src/pages/animations_page.dart';
 import 'package:intermediate_flutter/src/pages/circular_graphics_page.dart';
 import 'package:intermediate_flutter/src/pages/headers_page.dart';
+import 'package:intermediate_flutter/src/pages/pinterest_page.dart';
 import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
 
 class SplashPage extends StatelessWidget {
@@ -36,6 +37,10 @@ class SplashPage extends StatelessWidget {
             _FlatButton(
               text: 'Slideshow Page',
               onTap: () => _navigateTo(SlideshowPage(), context),
+            ),
+            _FlatButton(
+              text: 'Pinterest Page',
+              onTap: () => _navigateTo(PinterestPage(), context),
             ),
           ],
         ),

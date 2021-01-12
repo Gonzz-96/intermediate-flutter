@@ -1,24 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intermediate_flutter/src/widgets/pinterest_menu.dart';
+import 'package:provider/provider.dart';
 
 class PinterestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
-          _PinterestGrid(),
-          Positioned(
-            child: Container(
-              width: size.width,
-              child: Align(child: PinterestMenu()),
-            ),
-            bottom: size.height * 0.05,
-          ),
-        ],
+      body: ChangeNotifierProvider(
+        create: (_) => _MenuModel(),
+        child: Stack(
+          children: [
+            _PinterestGrid(),
+            _PositionedMenu(),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _PositionedMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Positioned(
+      child: Container(
+        width: size.width,
+        child: Align(
+          child: PinterestMenu(
+            isVisible: Provider.of<_MenuModel>(context).isMenuVisible,
+          ),
+        ),
+      ),
+      bottom: size.height * 0.05,
     );
   }
 }
@@ -38,10 +54,12 @@ class _PinterestGridState extends State<_PinterestGrid> {
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      if (scrollController.offset > _precedentOffset) {
-        print('Ocultar menu');
+      final menuModel = Provider.of<_MenuModel>(context, listen: false);
+      if (scrollController.offset > MediaQuery.of(context).size.height / 2 &&
+          scrollController.offset > _precedentOffset) {
+        menuModel.isMenuVisible = false;
       } else {
-        print('Mostrar menu');
+        menuModel.isMenuVisible = true;
       }
       _precedentOffset = scrollController.offset;
     });
@@ -88,5 +106,16 @@ class _PinterestItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _MenuModel with ChangeNotifier {
+  bool _isMenuVisible = true;
+
+  bool get isMenuVisible => _isMenuVisible;
+
+  set isMenuVisible(bool newValue) {
+    _isMenuVisible = newValue;
+    notifyListeners();
   }
 }

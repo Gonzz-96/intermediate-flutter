@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PinterestMenu extends StatelessWidget {
+  PinterestMenu({this.isVisible = true});
+
+  final bool isVisible;
+
   final items = <PinterestButton>[
     PinterestButton(
       icon: Icons.pie_chart,
@@ -33,7 +37,10 @@ class PinterestMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => _MenuModel(),
-      child: _PinterestMenuBackground(child: _MenuItems(items)),
+      child: AnimatedOpacity(
+          duration: Duration(milliseconds: 200),
+          opacity: (isVisible) ? 1 : 0,
+          child: _PinterestMenuBackground(child: _MenuItems(items))),
     );
   }
 }

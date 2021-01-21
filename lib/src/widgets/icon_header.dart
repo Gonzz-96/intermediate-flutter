@@ -2,15 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconHeader extends StatelessWidget {
+  final IconData iconData;
+  final String title;
+  final String subtitle;
+  final Color initialColor;
+  final Color endColor;
+
   final _translucentWhite = Colors.white.withOpacity(0.7);
+
+  IconHeader({
+    @required this.iconData,
+    @required this.title,
+    @required this.subtitle,
+    this.initialColor = const Color(0xff526BF7),
+    this.endColor = const Color(0xff67ACF2),
+  });
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      _IconHeaderBackground(),
+      _IconHeaderBackground(initialColor, endColor),
       Positioned(
         child: FaIcon(
-          FontAwesomeIcons.plus,
+          iconData,
           size: 250,
           color: Colors.white.withOpacity(0.2),
         ),
@@ -21,12 +35,12 @@ class IconHeader extends StatelessWidget {
         children: [
           SizedBox(height: 80, width: double.infinity),
           Text(
-            'Has solicitado',
+            title,
             style: TextStyle(fontSize: 20, color: _translucentWhite),
           ),
           SizedBox(height: 20),
           Text(
-            'Asistencia Médica',
+            subtitle,
             style: TextStyle(
               fontSize: 25,
               color: _translucentWhite,
@@ -34,7 +48,7 @@ class IconHeader extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          FaIcon(FontAwesomeIcons.plus, size: 80, color: Colors.white)
+          FaIcon(iconData, size: 80, color: Colors.white)
         ],
       )
     ]);
@@ -42,6 +56,14 @@ class IconHeader extends StatelessWidget {
 }
 
 class _IconHeaderBackground extends StatelessWidget {
+  final Color initialColor;
+  final Color endColor;
+
+  const _IconHeaderBackground(
+    this.initialColor,
+    this.endColor,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,8 +71,8 @@ class _IconHeaderBackground extends StatelessWidget {
       height: 300.0,
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color(0xff526BF7),
-          Color(0xff67ACF2),
+          initialColor,
+          endColor,
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
       ),

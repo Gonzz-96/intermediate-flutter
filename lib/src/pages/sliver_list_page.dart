@@ -4,7 +4,7 @@ class SliverListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _Title(),
+      body: _StuffList(),
     );
   }
 }
@@ -56,19 +56,24 @@ class _StuffList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 20,
-      itemBuilder: (context, index) => _ListItem(),
+      itemCount: items.length,
+      itemBuilder: (context, index) => items[index],
     );
   }
 }
 
 class _ListItem extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  const _ListItem(this.title, this.color);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
       child: Text(
-        'Orange',
+        title,
         style: TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
       ),
@@ -77,9 +82,20 @@ class _ListItem extends StatelessWidget {
       height: size.height / 7,
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: color,
         borderRadius: BorderRadius.circular(30),
       ),
     );
   }
 }
+
+final items = [
+  _ListItem('Orange', Color(0xffF08F66)),
+  _ListItem('Family', Color(0xffF2A38A)),
+  _ListItem('Subscriptions', Color(0xffF7CDD5)),
+  _ListItem('Books', Color(0xffFCEBAF)),
+  _ListItem('Orange', Color(0xffF08F66)),
+  _ListItem('Family', Color(0xffF2A38A)),
+  _ListItem('Subscriptions', Color(0xffF7CDD5)),
+  _ListItem('Books', Color(0xffFCEBAF)),
+];

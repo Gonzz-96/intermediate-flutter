@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:intermediate_flutter/src/challenges/animated_square_screen.dart';
 import 'package:intermediate_flutter/src/pages/animations_page.dart';
 import 'package:intermediate_flutter/src/pages/circular_graphics_page.dart';
+import 'package:intermediate_flutter/src/pages/emergency_page.dart';
 import 'package:intermediate_flutter/src/pages/headers_page.dart';
 import 'package:intermediate_flutter/src/pages/pinterest_page.dart';
 import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
 
 class SplashPage extends StatelessWidget {
+  final _screens = {
+    'Custom Painter': HeadersPage(),
+    'Custom Animations': AnimationsPage(),
+    'Animations Challenge': AnimatesSquaredScreen(),
+    'Circular Graphics': CircularGraphicsPage(),
+    'Slideshow Page': SlideshowPage(),
+    'Pinterest Page': PinterestPage(),
+    'Emergency Layout': EmergencyPage(),
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,35 +25,20 @@ class SplashPage extends StatelessWidget {
         title: Text('Intermediate Flutter Course'),
         backgroundColor: Colors.black,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _FlatButton(
-              text: 'Custom Painter',
-              onTap: () => _navigateTo(HeadersPage(), context),
-            ),
-            _FlatButton(
-              text: 'Custom Animations',
-              onTap: () => _navigateTo(AnimationsPage(), context),
-            ),
-            _FlatButton(
-              text: 'Animations Challenge',
-              onTap: () => _navigateTo(AnimatesSquaredScreen(), context),
-            ),
-            _FlatButton(
-              text: 'Circular Graphics',
-              onTap: () => _navigateTo(CircularGraphicsPage(), context),
-            ),
-            _FlatButton(
-              text: 'Slideshow Page',
-              onTap: () => _navigateTo(SlideshowPage(), context),
-            ),
-            _FlatButton(
-              text: 'Pinterest Page',
-              onTap: () => _navigateTo(PinterestPage(), context),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(60.0),
+        child: ListView.builder(
+          itemCount: _screens.length,
+          itemBuilder: (context, index) {
+            final pair = _screens.entries.toList()[index];
+
+            return _FlatButton(
+              text: pair.key,
+              onTap: () {
+                _navigateTo(pair.value, context);
+              },
+            );
+          },
         ),
       ),
     );
@@ -66,7 +62,7 @@ class _FlatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: FlatButton(
         height: 50,
         shape: RoundedRectangleBorder(

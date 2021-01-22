@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intermediate_flutter/src/widgets/icon_header.dart';
@@ -14,12 +15,14 @@ class EmergencyPage extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             children: [
               SizedBox(height: 80),
-              ..._items.map<Widget>((i) => SectionButton(
-                    iconData: i.iconData,
-                    initialColor: i.initialColor,
-                    endColor: i.endColor,
-                    text: i.text,
-                    onPress: () {},
+              ..._items.map<Widget>((i) => FadeInLeft(
+                    child: SectionButton(
+                      iconData: i.iconData,
+                      initialColor: i.initialColor,
+                      endColor: i.endColor,
+                      text: i.text,
+                      onPress: () {},
+                    ),
                   )),
             ],
           ),

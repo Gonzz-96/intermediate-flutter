@@ -4,7 +4,23 @@ class SliverListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _StuffList(),
+      body: _MainScroll(),
+    );
+  }
+}
+
+class _MainScroll extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          backgroundColor: Colors.redAccent,
+          title: Text('Hello, world'),
+        ),
+        SliverList(delegate: SliverChildListDelegate([...items]))
+      ],
     );
   }
 }
@@ -90,6 +106,14 @@ class _ListItem extends StatelessWidget {
 }
 
 final items = [
+  _ListItem('Orange', Color(0xffF08F66)),
+  _ListItem('Family', Color(0xffF2A38A)),
+  _ListItem('Subscriptions', Color(0xffF7CDD5)),
+  _ListItem('Books', Color(0xffFCEBAF)),
+  _ListItem('Orange', Color(0xffF08F66)),
+  _ListItem('Family', Color(0xffF2A38A)),
+  _ListItem('Subscriptions', Color(0xffF7CDD5)),
+  _ListItem('Books', Color(0xffFCEBAF)),
   _ListItem('Orange', Color(0xffF08F66)),
   _ListItem('Family', Color(0xffF2A38A)),
   _ListItem('Subscriptions', Color(0xffF7CDD5)),

@@ -6,6 +6,7 @@ import 'package:intermediate_flutter/src/pages/emergency_page.dart';
 import 'package:intermediate_flutter/src/pages/headers_page.dart';
 import 'package:intermediate_flutter/src/pages/pinterest_page.dart';
 import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
+import 'package:intermediate_flutter/src/pages/sliver_list_page.dart';
 
 class SplashPage extends StatelessWidget {
   final _screens = {
@@ -16,6 +17,7 @@ class SplashPage extends StatelessWidget {
     'Slideshow Page': SlideshowPage(),
     'Pinterest Page': PinterestPage(),
     'Emergency Layout': EmergencyPage(),
+    'Sliver List / Appbar': SliverListPage()
   };
 
   @override

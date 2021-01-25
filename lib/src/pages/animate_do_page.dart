@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intermediate_flutter/src/pages/twitter_page.dart';
 
 class AnimateDoPage extends StatelessWidget {
   @override
@@ -16,7 +17,12 @@ class AnimateDoPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 10),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => TwitterPage()),
+                );
+              },
               icon: FaIcon(
                 FontAwesomeIcons.twitter,
               ),

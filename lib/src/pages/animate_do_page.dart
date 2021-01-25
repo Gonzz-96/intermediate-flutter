@@ -1,3 +1,5 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,7 +25,12 @@ class AnimateDoPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 14),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => AnimateDoPage()),
+                );
+              },
               icon: FaIcon(
                 Icons.navigate_next,
               ),
@@ -31,27 +38,37 @@ class AnimateDoPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: FaIcon(FontAwesomeIcons.play),
+      floatingActionButton: ElasticInRight(
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: FaIcon(FontAwesomeIcons.play),
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.new_releases,
-              color: Colors.blue,
-              size: 40,
+            ElasticIn(
+              delay: Duration(milliseconds: 1100),
+              child: Icon(Icons.new_releases, color: Colors.blue, size: 40),
             ),
-            Text('Title',
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w200)),
-            Text('I am a little text',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
-            Container(
-              width: 220,
-              height: 2,
-              color: Colors.blue,
+            FadeInDown(
+              delay: Duration(milliseconds: 200),
+              child: Text('Title',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w200)),
+            ),
+            FadeInDown(
+              delay: Duration(milliseconds: 800),
+              child: Text('I am a little text',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
+            ),
+            FadeInLeft(
+              delay: Duration(milliseconds: 1100),
+              child: Container(
+                width: 220,
+                height: 2,
+                color: Colors.blue,
+              ),
             )
           ],
         ),

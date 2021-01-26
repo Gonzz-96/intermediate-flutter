@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intermediate_flutter/src/challenges/animated_square_screen.dart';
+import 'package:intermediate_flutter/src/pages/animate_do_page.dart';
 import 'package:intermediate_flutter/src/pages/animations_page.dart';
 import 'package:intermediate_flutter/src/pages/circular_graphics_page.dart';
 import 'package:intermediate_flutter/src/pages/emergency_page.dart';
@@ -17,7 +18,8 @@ class SplashPage extends StatelessWidget {
     'Slideshow Page': SlideshowPage(),
     'Pinterest Page': PinterestPage(),
     'Emergency Layout': EmergencyPage(),
-    'Sliver List / Appbar': SliverListPage()
+    'Sliver List / Appbar': SliverListPage(),
+    'Animate Do': AnimateDoPage(),
   };
 
   @override

@@ -74,16 +74,25 @@ class _ScreensItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: Icon(Icons.chevron_right),
+              )
+            ],
           ),
           if (shouldHaveDivider)
             Container(

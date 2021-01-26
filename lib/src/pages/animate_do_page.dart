@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intermediate_flutter/src/pages/navigation_page.dart';
 import 'package:intermediate_flutter/src/pages/twitter_page.dart';
 
 class AnimateDoPage extends StatelessWidget {
@@ -46,7 +47,12 @@ class AnimateDoPage extends StatelessWidget {
       ),
       floatingActionButton: ElasticInRight(
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => NavigationPage()),
+            );
+          },
           child: FaIcon(FontAwesomeIcons.play),
         ),
       ),

@@ -54,8 +54,11 @@ class _PrincipalMenu extends StatelessWidget {
               ),
               title: Text('Dark Mode'),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+            SafeArea(
+              bottom: true,
+              top: false,
+              right: false,
+              left: false,
               child: ListTile(
                 leading:
                     Icon(Icons.add_to_home_screen, color: Colors.blueAccent),
@@ -76,11 +79,13 @@ class _PrincipalMenu extends StatelessWidget {
 
 class _ScreensItem extends StatelessWidget {
   const _ScreensItem({
+    this.icon,
     this.text,
     this.onTap,
     this.shouldHaveDivider,
   });
 
+  final IconData icon;
   final String text;
   final Function onTap;
   final bool shouldHaveDivider;
@@ -92,9 +97,12 @@ class _ScreensItem extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.slideshare,
-              color: Colors.blueAccent,
+            leading: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: FaIcon(
+                icon,
+                color: Colors.blueAccent,
+              ),
             ),
             title: Padding(
               padding: const EdgeInsets.all(25.0),
@@ -140,6 +148,18 @@ class _ScreensList extends StatelessWidget {
     'Animate Do': AnimateDoPage(),
   };
 
+  final _icons = [
+    FontAwesomeIcons.heading,
+    FontAwesomeIcons.peopleCarry,
+    FontAwesomeIcons.play,
+    FontAwesomeIcons.circleNotch,
+    FontAwesomeIcons.slideshare,
+    FontAwesomeIcons.pinterest,
+    FontAwesomeIcons.ambulance,
+    FontAwesomeIcons.mobile,
+    FontAwesomeIcons.infinity,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -149,6 +169,7 @@ class _ScreensList extends StatelessWidget {
         final pair = _screens.entries.toList()[index];
         return _ScreensItem(
           text: pair.key,
+          icon: _icons[index],
           onTap: () {
             _navigateTo(pair.value, context);
           },

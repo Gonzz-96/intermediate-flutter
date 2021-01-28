@@ -37,7 +37,6 @@ class SplashPage extends StatelessWidget {
         itemCount: _screens.length,
         itemBuilder: (context, index) {
           final pair = _screens.entries.toList()[index];
-
           return _ScreensItem(
             text: pair.key,
             onTap: () {
@@ -72,27 +71,23 @@ class _ScreensItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
+          ListTile(
+            title: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 30.0),
-                child: Icon(Icons.chevron_right),
-              )
-            ],
+            ),
+            trailing: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Icon(Icons.chevron_right),
+            ),
           ),
           if (shouldHaveDivider)
             Container(

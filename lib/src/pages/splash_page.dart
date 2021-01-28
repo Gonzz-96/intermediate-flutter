@@ -29,7 +29,7 @@ class SplashPage extends StatelessWidget {
 class _PrincipalMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTheme = Provider.of<ThemeChange>(context);
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Drawer(
       child: Container(
         child: Column(
@@ -113,7 +113,6 @@ class _ScreensItem extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),

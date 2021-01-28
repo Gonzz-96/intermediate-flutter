@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intermediate_flutter/src/pages/splash_page.dart';
+import 'package:intermediate_flutter/src/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    child: MyApp(),
+    create: (_) => ThemeChange(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

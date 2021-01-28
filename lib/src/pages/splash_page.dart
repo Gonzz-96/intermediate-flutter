@@ -9,6 +9,8 @@ import 'package:intermediate_flutter/src/pages/headers_page.dart';
 import 'package:intermediate_flutter/src/pages/pinterest_page.dart';
 import 'package:intermediate_flutter/src/pages/slideshow_page.dart';
 import 'package:intermediate_flutter/src/pages/sliver_list_page.dart';
+import 'package:intermediate_flutter/src/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatelessWidget {
   @override
@@ -27,6 +29,7 @@ class SplashPage extends StatelessWidget {
 class _PrincipalMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChange>(context);
     return Drawer(
       child: Container(
         child: Column(
@@ -48,8 +51,8 @@ class _PrincipalMenu extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.lightbulb, color: Colors.blueAccent),
               trailing: Switch.adaptive(
-                value: true,
-                onChanged: null,
+                value: appTheme.darkTheme,
+                onChanged: (value) => appTheme.darkTheme = value,
                 activeColor: Colors.blueAccent,
               ),
               title: Text('Dark Mode'),
@@ -63,8 +66,8 @@ class _PrincipalMenu extends StatelessWidget {
                 leading:
                     Icon(Icons.add_to_home_screen, color: Colors.blueAccent),
                 trailing: Switch.adaptive(
-                  value: true,
-                  onChanged: null,
+                  value: appTheme.customTheme,
+                  onChanged: (value) => appTheme.customTheme = value,
                   activeColor: Colors.blueAccent,
                 ),
                 title: Text('Custom Theme'),

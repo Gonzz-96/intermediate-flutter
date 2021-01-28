@@ -7,7 +7,7 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       child: MyApp(),
-      create: (_) => ThemeChanger(1),
+      create: (_) => ThemeChanger(2),
     ),
   );
 }

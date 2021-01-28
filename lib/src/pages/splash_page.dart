@@ -15,11 +15,16 @@ import 'package:provider/provider.dart';
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Scaffold(
       drawer: _PrincipalMenu(),
       appBar: AppBar(
-        title: Text('Intermediate Flutter Course'),
-        backgroundColor: Colors.blue,
+        title: Text(
+          'Intermediate Flutter Course',
+        ),
+        backgroundColor: appTheme.darkTheme
+            ? Colors.grey[1000]
+            : appTheme.currentTheme.primaryColor,
       ),
       body: _ScreensList(),
     );
@@ -30,6 +35,7 @@ class _PrincipalMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
+    final currentTheme = appTheme.currentTheme;
     return Drawer(
       child: Container(
         child: Column(
@@ -39,7 +45,7 @@ class _PrincipalMenu extends StatelessWidget {
                 width: double.infinity,
                 height: 100,
                 child: CircleAvatar(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: currentTheme.accentColor,
                   child: Text(
                     'GC',
                     style: TextStyle(fontSize: 50),
@@ -49,11 +55,11 @@ class _PrincipalMenu extends StatelessWidget {
             ),
             Expanded(child: _ScreensList()),
             ListTile(
-              leading: Icon(Icons.lightbulb, color: Colors.blueAccent),
+              leading: Icon(Icons.lightbulb, color: currentTheme.accentColor),
               trailing: Switch.adaptive(
                 value: appTheme.darkTheme,
                 onChanged: (value) => appTheme.darkTheme = value,
-                activeColor: Colors.blueAccent,
+                activeColor: currentTheme.accentColor,
               ),
               title: Text('Dark Mode'),
             ),
@@ -63,12 +69,12 @@ class _PrincipalMenu extends StatelessWidget {
               right: false,
               left: false,
               child: ListTile(
-                leading:
-                    Icon(Icons.add_to_home_screen, color: Colors.blueAccent),
+                leading: Icon(Icons.add_to_home_screen,
+                    color: currentTheme.accentColor),
                 trailing: Switch.adaptive(
                   value: appTheme.customTheme,
                   onChanged: (value) => appTheme.customTheme = value,
-                  activeColor: Colors.blueAccent,
+                  activeColor: currentTheme.accentColor,
                 ),
                 title: Text('Custom Theme'),
               ),
@@ -95,6 +101,7 @@ class _ScreensItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -104,7 +111,7 @@ class _ScreensItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: FaIcon(
                 icon,
-                color: Colors.blueAccent,
+                color: appTheme.accentColor,
               ),
             ),
             title: Padding(
@@ -121,7 +128,7 @@ class _ScreensItem extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Icon(
                 Icons.chevron_right,
-                color: Colors.blueAccent,
+                color: appTheme.accentColor,
               ),
             ),
           ),
@@ -129,7 +136,7 @@ class _ScreensItem extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 1,
-              color: Colors.black.withOpacity(0.3),
+              color: appTheme.primaryColorLight,
             )
         ],
       ),
